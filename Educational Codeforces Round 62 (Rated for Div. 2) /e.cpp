@@ -2,7 +2,7 @@
 using namespace std;
 const int maxn = 2e5+10;
 const int mod = 998244353;
-int dp[maxn][2];
+long long dp[maxn][2];
 long long qpow(long long a,int b)
 {
     long long ans = 1;
