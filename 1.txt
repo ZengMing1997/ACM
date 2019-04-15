@@ -1,0 +1,6 @@
+Running test 1
+RobotNUM 2
+OK
+Running test 2
+RobotNUM 2
+OK

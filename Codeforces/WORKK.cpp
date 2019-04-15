@@ -124,7 +124,7 @@ void GetLearnedQRError()
 int main()
 {
     //int n = 40 , m = 40;
-    freopen("/home/zengming/桌面/data/16.in","w",stdout);
+    freopen("/home/zengming/桌面/data/1.in","w",stdout);
     scanf("%d%d",&n,&m);
     memset(G,0,sizeof(G));
     memset(vis,0,sizeof(vis));
@@ -173,6 +173,7 @@ int main()
 	for(auto i : Robot_learned_edge)
 	{
 		printf("{\"robot_index\": \"%d\",\"learned_times\":%d,\"head\": \"%d\",\"tail\":\"%d\"}",Robot_id[rand()%Robot_id.size()],rand()%4+1,i.first,i.second);
+        printf("{\"robot_index\": \"%d\",\"learned_times\":%d,\"head\": \"%d\",\"tail\":\"%d\"}",Robot_id[rand()%Robot_id.size()],rand()%4+1,i.second,i.first);
 		if (i != *prev(Robot_learned_edge.end())) printf(",");
 	}
 	printf("]}}\n");

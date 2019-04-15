@@ -23,6 +23,6 @@ int main()
         int m = (l+r)/2;
         if(check(m)) l = m + 1;
         else r = m;
-    }
+
     cout<< l - 1 <<endl;
 }
