@@ -67,12 +67,12 @@ int main()
     {
         int op,l,r;
         scanf("%d%d%d",&op,&l,&r);
-        if(op == 1) printf("%d\n",gcd(query1(l+1,r,1,n,1),query2(1,l,1,n,1))) ;//, cout<<query1(l+1,r,1,n,1) << "   " << query2(1,l,1,n,1)<<endl;
+        if(op == 1) printf("%d\n",abs(gcd(query1(l+1,r,1,n,1),query2(1,l,1,n,1)))) ;//, cout<<query1(l+1,r,1,n,1) << "   " << query2(1,l,1,n,1)<<endl;
         else
         {
             int u;scanf("%d",&u);
             update(l,u,1,n,1);
-            if(r < n);
+            //if(r < n);
             update(r+1,-u,1,n,1);
         }
     }
