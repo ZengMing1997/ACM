@@ -1,99 +1,47 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-const int maxn = 1e5+8;
-int a[maxn] , b[maxn];
-#define int long long
-signed main()
+const int maxn=200005;
+int n;
+char s[maxn],t[maxn];
+int ans[maxn];
+int main()
 {
-	int t , n , k ;
-	scanf("%lld" , &t);
-	while(t--)
-	{
-		int x;
-		int p = 1,q = 1 , ans = 0;
-		scanf("%lld %lld" , &n , &k);
-		for(int i = 1 ; i <= n ; i++)
-		{
-			scanf("%lld" ,&x);
-			if(x < 0) 
-			{
-				a[p] = -x;
-				p++;
-			}
-			if(x > 0) 
-			{
-				b[q] = x;
-				q++;
-			}
-		}
-		sort(a+1 , a+p);
-		sort(b+1 , b+q);
-		if(a[p-1] <= b[q-1] && (p!=1 && q!= 1))
-		{
-			int x = p-1,y = q-1;
-			while(x>0)
-			{
-				ans += a[x];
-				x -= k;
-			}
-			int te = b[y];
-			y -= k;
-			while(y>0)
-			{
-				ans += b[y];
-				y -= k;
-			}
-			ans = ans *2 + te;
-		}
-		else if(a[p-1] > b[q-1] && ( p!=1 && q!= 1))
-		{
-			int x = p-1,y = q-1;
-			int te = a[x];
-			x -= k;
-			while(x > 0)
-			{
-				ans += a[x];
-				x -= k;
-			}
-			while(y>0)
-			{
-				ans += b[y];
-				y -= k; 
-			}
-			ans = ans *2 + te;
-		}
-		else if(a[p-1]==0 && q != 0)
-		{
-			int x = p-1,y = q-1;
-			int te = b[y];
-			y -= k;
-			while(y>0)
-			{
-				ans += b[y];
-				y -= k;
-			}
-			ans = ans *2 + te;
-		}
-		else if(p != 1 && b[q-1]== 0)
-		{
-			int x = p-1,y = q-1;
-			int te = a[x];
-			x -= k;
-			while(x>0)
-			{
-				ans += a[x];
-				x -= k;
-			}
-			ans = ans *2 + te;
-		}
-		printf("%lld\n" , ans);
-	 } 
-	return 0;
+    int i;
+    int x,y;
+    while(cin>>n)
+    {
+        getchar();
+        memset(s,0,sizeof(s));
+        memset(t,0,sizeof(t));
+        gets(s);
+        gets(t);
+        for(i=n-1;i>=0;i--)//低位到高位模拟减法和除法 
+        {
+            x = t[i] - 'a';
+            y = s[i] - 'a';
+            if(x - y < 0)//当前位不够减就借位 
+            {
+                t[i-1]--;
+                x += 26;//注意借来的是十进制下的26 
+            }
+            if((x-y)%2 == 0)//模拟除法 
+            ans[i] = (x-y)/2;
+            else//该位是奇数
+            {
+                ans[i] = (x-y)/2;
+                ans[i+1] += 13;//给后一位13（即这一位除2最后有0.5，就等于26进制下的13）
+                                //这个过程可能会导致后一位超出26，下面再模拟一下加法取余即可  
+            }
+        }
+        for(i=n-1;i>=0;i--)//低位到高位模拟加法 
+        {
+            x = s[i] - 'a';
+            ans[i-1] += (x+ans[i])/26;//高位进位 
+            ans[i] = (x+ans[i])%26;//低位取余 
+        }
+        for(i=0;i<n;i++)
+        cout<<char(ans[i]+'a');
+        cout<<endl;
+    }
+    return 0;
 }
-/*
-2
-5 3
--1 -2 3 -4 -5
-6 3
-1 0 -2 -1 1 2
-*/
