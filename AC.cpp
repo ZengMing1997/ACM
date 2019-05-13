@@ -1,47 +1,69 @@
 #include <bits/stdc++.h>
 using namespace std;
-const int MAXN = 4e5 + 5;
-int n, a[MAXN], ans[MAXN];
-int mv(int x, int &sz)
+const int MAXN = 1e5 + 5;
+int n;
+bool check(int a, int b)
 {
-    while (a[x] > 1) sz += a[x++];
-    sz += a[x];
-    return x;
+    if (a > 99999) return false;
+    set<int> s;
+    for (int i = 1; i <= 5; i++)
+    {
+        s.insert(a % 10);
+        s.insert(b % 10);
+        a /= 10, b /= 10;
+    }
+    return s.size() == 10;
 }
 int main()
 {
-	scanf("%d", &n);
-    int MIN = MAXN, MAX = 0; 
-	for (int i = 1; i <= n; i++) 
-	{
-		int x; scanf("%d", &x);
-		a[x]++;
-        MIN = min(MIN, x);
-        MAX = max(MAX, x);
-	}
-    int sz = a[MIN];
-    int s = MIN, e = mv(s + 1, sz), L = e, R;
-    //cout << s << " " << e << endl;
-    while (L <= MAX)
+    bool has_out = false;
+	while (scanf("%d", &n) && n)
     {
-        while (L <= MAX && a[L] == 0) L++;
-        int tmp = a[L];
-        R = mv(L + 1, tmp);
-        //cout << L << " " << R << endl;
-        if (tmp > sz) sz = tmp, s = L, e = R;
-        L = R;
+        if (has_out) printf("\n");
+        has_out = true;
+        bool flag = false;
+        for (int i = 0; i <= 99999; i++)
+        {
+            if (check(i * n, i))
+            {
+                flag = true;
+                printf("%05d / %05d = %d\n", i * n, i, n);
+            }
+        }
+        if (!flag) printf("There are no solutions for %d.\n", n);
     }
-	L = n / 2, R = n / 2;
-	for (int i = s; i <= e; i++)
-	{
-		if (a[i]) a[i]--, ans[--L] = i;
-		while (a[i]--) ans[R++] = i;
-	}
-	printf("%d\n", R - L);
-	for (int i = L; i < R; i++) printf("%d ", ans[i]);
 	return 0;
 }
 /*
-7
-4 3 5 1 2 2 1
+50
+29
+2
+46
+44
+80
+80
+75
+3
+27
+14
+33
+46
+67
+5
+79
+27
+73
+3
+60
+74
+66
+25
+14
+74
+26
+17
+23
+27
+47
+0
 */
