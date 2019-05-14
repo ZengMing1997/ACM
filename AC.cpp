@@ -32,6 +32,7 @@ int main()
         }
         if (!flag) printf("There are no solutions for %d.\n", n);
     }
+    lllll;
 	return 0;
 }
 /*
