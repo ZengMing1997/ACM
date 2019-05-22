@@ -11,7 +11,7 @@ public:
         int len = nums.size();
         for(int i = 0 ; i < len ; i++)
         {
-            if(nums[i] == i || nums[i] <= 0) continue;
+            if(nums[i] == i + 1 || nums[i] <= 0) continue;
             int x = nums[i];
             while(x >= 1 && x <= len && x  != nums[x-1]) swap(x,nums[x-1]);   
         }
@@ -19,6 +19,7 @@ public:
         {
             if(i + 1 != nums[i]) return i+1;
         }
+        return nums.size()+1;
     }
 };
 
