@@ -2,24 +2,45 @@
 using namespace std;
 struct node
 {
-  int s,e,co;
-  node (int s,int e,int co) : s(s) , e(e) , co(co) {}
+  int d,co,flag;
+  node (int d, int co, int flag) : d(d) , co(co),flag(flag) {}
   friend bool operator < (const node a,const node b)
   {
-    if(a.s == b.co) return a.s < b.s;
-    return a.co < b.co;
+    return a.d < b.d;
   }
 };
+multiset<int>M;
+vector<node>V;
 int main()
 {
   int n,m;
   scanf("%d%d",&n,&m);
-  vector<node>V(n);
   for(int i = 0 ; i < n ; i++)
   {
     int s,e,co;
     scanf("%d%d%d",&s,&e,&co);
-    V.push_back(node(s,e,co));
+    V.push_back(node(s-co,co,0));
+    V.push_back(node(e-co,co,1));
   }
   sort(V.begin(),V.end());
+  int k = 0;
+  while(m--)
+  {
+    int q;
+    scanf("%d",&q);
+    while(k < V.size())
+    {
+      if(V[k].d <= q)
+      {
+        if(V[k].flag) M.erase(M.find(V[k].co));
+        else M.insert(V[k].co); 
+        k++;
+      }
+      else break;
+     
+    }
+    int ans = - 1;
+    if(M.size()) ans = *M.begin();
+    cout<<ans<<endl;
+  }
 }
