@@ -10,25 +10,23 @@
       ListNode *next;
       ListNode(int x) : val(x), next(NULL) {}
   };*/
- 
 class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head) {
-        if(head == NULL) return NULL;
-        ListNode *ans = new ListNode(head->val);
-        ListNode *cur = ans;
+        if(head == NULL) return head;
+        ListNode *Ans = new ListNode(head->val);
+        ListNode *cur = Ans;
         while(head != NULL)
         {
-            if(cur->val == head->val) head = head->next;
-            else 
+            if(cur->val != head->val)
             {
                 cur->next = new ListNode(head->val);
-                head = head->next;
                 cur = cur->next;
             }
+            head = head->next;
         }
-        return ans;
-        
+        return Ans;
     }
 };
+
 

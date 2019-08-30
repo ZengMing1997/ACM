@@ -35,7 +35,7 @@ public:
             else if(l2 != NULL)
             {
                 cur->next = new ListNode(l2->val);
-                cur = cur->next;
+                cur     = cur->next;
                 l2 = l2->next;
             }
         }
