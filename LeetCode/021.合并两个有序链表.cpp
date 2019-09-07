@@ -1,4 +1,6 @@
-/*
+#include <bits/stdc++.h>
+using namespace std;
+int main()/*
  * @lc app=leetcode.cn id=21 lang=cpp
  *
  * [21] 合并两个有序链表
